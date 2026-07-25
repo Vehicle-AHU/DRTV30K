@@ -1,5 +1,4 @@
 # DRTV30K Dataset
-DRTV30K
 
 **Generative Alignment Network for Multimodal UAV Object Detection**, 
 Wentao Wu, Chenglong Li*, Ziwen Wang, Zhaodong Ding, Xiao Wang, Bin Luo
