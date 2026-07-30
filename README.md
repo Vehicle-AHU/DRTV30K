@@ -97,7 +97,7 @@ and viewpoint changes.
 ## Dataset Visualization
 
 <p align="center">
-  <img src="assets/drtv30k_overview.png" width="95%">
+  <img src="figures/dataset_image.jpg" width="95%">
 </p>
 
 <p align="center">
@@ -340,7 +340,7 @@ appearance details, target density, and background coverage.
 ## Dataset Statistics
 
 <p align="center">
-  <img src="assets/drtv30k_statistics.png" width="90%">
+  <img src="figures/dataset_distribution.jpg" width="90%">
 </p>
 
 <p align="center">
