@@ -532,12 +532,10 @@ entry:
 
 ```bibtex
 @misc{wu2026drtv30k,
-  title        = {DRTV30K: A Large-Scale Multimodal UAV Object Detection Dataset},
-  author       = {Wentao Wu and Chenglong Li and Ziwen Wang and
-                  Zhaodong Ding and Xiao Wang and Bin Luo},
+  title        = {Generative Alignment Network for Multimodal UAV Object Detection},
+  author       = {Wu, Wentao and Li, Chenglong and Wang, Ziwen and Ding, Zhaodong and Wang, Xiao and Luo, Bin},
   year         = {2026},
   howpublished = {\url{https://github.com/Vehicle-AHU/DRTV30K}},
-  note         = {RGB-T UAV object detection dataset}
 }
 ```
 
@@ -573,10 +571,7 @@ For questions about the dataset, annotations, or evaluation protocol, please
 contact:
 
 **Wentao Wu**
-
-**Chenglong Li**  
-Corresponding author  
-Email: `lcl1314@foxmail.com`
+wuwentao0708@163.com
 
 You may also submit an issue through this GitHub repository.
 
