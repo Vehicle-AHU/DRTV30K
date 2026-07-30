@@ -2,42 +2,67 @@
 
 <div align="center">
 
-## DRTV30K: A Large-Scale RGBT UAV Object Detection Dataset
+## DRTV30K: A Large-Scale Multimodal UAV Object Detection Dataset
 
 **Associated work:**  
 **Generative Alignment Network for Multimodal UAV Object Detection**
 
-Wentao Wu, Chenglong Li*, Ziwen Wang, Zhaodong Ding, Xiao Wang, and Bin Luo
+Wentao Wu, Chenglong Li<sup>*</sup>, Ziwen Wang, Zhaodong Ding, Xiao Wang, and Bin Luo
 
 Anhui University
+
+<sup>*</sup>Corresponding author
 
 </div>
 
 ---
 
+> **Benchmark Setting:** DRTV30K provides oriented bounding box annotations for
+> nine vehicle categories. Seven categories are used for the standard object
+> detection benchmark, while **Pickup** and **Emergency Vehicle** are retained
+> as rare categories for few-shot, long-tailed, and small-sample detection
+> research.
+
 ## Introduction
 
-DRTV30K is a large-scale multimodal UAV object detection dataset containing paired visible and thermal infrared images.
+DRTV30K is a large-scale multimodal UAV object detection dataset containing
+paired visible and thermal infrared images captured from UAV top-view
+perspectives.
 
-The dataset was collected from UAV top-view perspectives under diverse scenes, illumination conditions, and flight altitudes. It contains substantial cross-modal appearance differences and local spatial discrepancies caused by different imaging mechanisms, camera configurations, UAV attitude variations, and camera distortion.
+The dataset contains **30,640 paired RGB-T images**, corresponding to
+**61,280 individual images**, with **224,619 oriented bounding box
+annotations** across nine vehicle categories.
 
-DRTV30K is designed to support research on:
+DRTV30K covers diverse scenes, illumination conditions, flight altitudes, and
+object scales. It also retains realistic local spatial discrepancies between
+the visible and thermal infrared modalities, making it suitable for studying
+multimodal detection, cross-modal alignment, feature fusion, small-object
+recognition, and detection under adverse environmental conditions.
+
+Among the nine annotated categories, seven categories form the standard
+DRTV30K object detection benchmark. The remaining two categories, Pickup and
+Emergency Vehicle, contain relatively few instances and are additionally
+released to support few-shot and long-tailed object detection research.
+
+DRTV30K can support research on:
 
 - RGB-thermal multimodal object detection
 - UAV-based vehicle detection
+- Oriented object detection
 - Cross-modal alignment and fusion
-- Small and oriented object detection
-- Detection under low-light and adverse conditions
-- Long-tailed and few-shot object detection
-
-The dataset provides oriented bounding box annotations for nine vehicle categories.
+- Small-object detection
+- Detection under nighttime and adverse conditions
+- Long-tailed object detection
+- Few-shot and rare-category detection
 
 ---
 
 ## News
 
 - **2026-XX-XX:** DRTV30K is publicly released.
-- The associated paper and source code will be updated after they become publicly available.
+- Dataset documentation and evaluation tools will be continuously updated.
+- The associated paper and source code will be released after they become
+  publicly available.
 
 ---
 
@@ -45,10 +70,12 @@ The dataset provides oriented bounding box annotations for nine vehicle categori
 
 | Attribute | Description |
 |---|---:|
-| Paired RGBT images | 30,640 pairs |
-| Total images | 61,280 |
-| Annotated objects | 224,619 |
-| Object categories | 9 |
+| Paired RGB-T images | 30,640 pairs |
+| Total individual images | 61,280 |
+| Total annotations | 224,619 |
+| Total annotated categories | 9 |
+| Standard benchmark categories | 7 |
+| Rare/few-shot categories | 2 |
 | Annotation type | Oriented Bounding Box |
 | Stored image resolution | 820 × 580 |
 | Flight altitude | 50–180 m |
@@ -56,9 +83,14 @@ The dataset provides oriented bounding box annotations for nine vehicle categori
 | Validation set | 2,037 pairs |
 | Test set | 8,150 pairs |
 
-Each sample contains a visible image and its corresponding thermal infrared image.
+Each sample contains one visible image and its corresponding thermal infrared
+image.
 
-Although the paired videos were manually pre-aligned during preprocessing, local pixel-level discrepancies between the two modalities were intentionally retained. These discrepancies reflect practical challenges in real-world RGBT UAV perception.
+Although the paired videos were manually center-aligned during preprocessing,
+additional pixel-level registration was not performed. Therefore, the dataset
+retains realistic local cross-modal discrepancies caused by differences in
+imaging mechanisms, camera configurations, UAV attitude, camera distortion,
+and viewpoint changes.
 
 ---
 
@@ -69,16 +101,27 @@ Although the paired videos were manually pre-aligned during preprocessing, local
 </p>
 
 <p align="center">
-  <em>Examples of paired visible-thermal images, oriented bounding box annotations, and representative instances from the nine object categories.</em>
+  <em>
+    Examples of paired visible and thermal infrared images, oriented bounding
+    box annotations, and representative samples from the nine object
+    categories.
+  </em>
 </p>
 
-> The visualization image will be added soon.
+> The dataset visualization will be added soon.
 
 ---
 
-## Object Categories
+## Category Setting
 
-DRTV30K contains the following nine vehicle categories:
+DRTV30K provides oriented bounding box annotations for nine vehicle
+categories. The categories are divided into a standard benchmark group and a
+rare-category group.
+
+### Standard Benchmark Categories
+
+The following seven categories are used in the standard DRTV30K object
+detection benchmark:
 
 1. Car
 2. Freight Car
@@ -87,50 +130,83 @@ DRTV30K contains the following nine vehicle categories:
 5. Tricycle
 6. Bus
 7. Construction Vehicle
-8. Pickup
-9. Emergency Vehicle
 
-The number of oriented bounding box annotations for each category is shown below.
+### Rare and Few-Shot Categories
 
-| Category | Number of Instances |
-|---|---:|
-| Car | 194,514 |
-| Freight Car | 10,397 |
-| Truck | 8,161 |
-| Van | 6,938 |
-| Tricycle | 2,029 |
-| Bus | 1,176 |
-| Construction Vehicle | 955 |
-| Pickup | 395 |
-| Emergency Vehicle | 54 |
-| **Total** | **224,619** |
+The following two categories contain substantially fewer annotated instances:
 
-The Pickup and Emergency Vehicle categories contain relatively few samples and can also support research on long-tailed recognition, few-shot detection, and small-sample learning.
+1. Pickup
+2. Emergency Vehicle
+
+These two categories are not included in the standard seven-category benchmark
+evaluation. Their annotations are retained and released to support research
+on:
+
+- Few-shot object detection
+- Long-tailed object detection
+- Rare-category recognition
+- Small-sample learning
+- Category-incremental object detection
+- Imbalanced multimodal learning
 
 ---
 
-## Data Split
+## Category Statistics
 
-The dataset is divided into training, validation, and test sets.
+The number of oriented bounding box annotations for each category is shown
+below.
 
-| Split | Number of RGBT Pairs | Number of Images |
+| Category | Number of Instances | Usage |
+|---|---:|---|
+| Car | 194,514 | Standard benchmark |
+| Freight Car | 10,397 | Standard benchmark |
+| Truck | 8,161 | Standard benchmark |
+| Van | 6,938 | Standard benchmark |
+| Tricycle | 2,029 | Standard benchmark |
+| Bus | 1,176 | Standard benchmark |
+| Construction Vehicle | 955 | Standard benchmark |
+| Pickup | 395 | Few-shot research |
+| Emergency Vehicle | 54 | Few-shot research |
+| **Total** | **224,619** | — |
+
+The considerable differences in category frequency also make DRTV30K useful
+for evaluating detection algorithms under class imbalance and long-tailed
+data distributions.
+
+---
+
+## Dataset Split
+
+DRTV30K is divided into training, validation, and test sets.
+
+| Split | Number of RGB-T Pairs | Number of Individual Images |
 |---|---:|---:|
 | Training | 20,453 | 40,906 |
 | Validation | 2,037 | 4,074 |
 | Test | 8,150 | 16,300 |
 | **Total** | **30,640** | **61,280** |
 
-The official split files are included in the released dataset.
+The official split files are provided with the released dataset. Researchers
+are encouraged to use the official splits to ensure fair and reproducible
+comparisons.
 
 ---
 
 ## Data Collection
 
-DRTV30K was collected using a **DJI Matrice 4T** UAV equipped with visible and thermal infrared cameras.
+DRTV30K was collected using a **DJI Matrice 4T** UAV equipped with visible and
+thermal infrared cameras.
 
-A total of 232 paired visible-thermal videos were collected from different regions. The visible camera records videos at 30 frames per second. The thermal camera has a pixel pitch of 12 μm and operates within an infrared wavelength range of 8–14 μm.
+A total of **232 paired visible-thermal videos** were collected from different
+regions. Due to the different imaging mechanisms and sensor configurations,
+the visible and thermal cameras have different native spatial resolutions.
 
-The data cover a wide range of practical UAV observation conditions, including:
+The visible camera records videos at 30 frames per second. The thermal camera
+has a pixel pitch of 12 μm and operates in an infrared wavelength range of
+8–14 μm. The thermal camera also supports a super-resolution imaging mode.
+
+The dataset was collected under diverse real-world UAV observation
+conditions, including:
 
 - Urban roads
 - Highways
@@ -138,37 +214,77 @@ The data cover a wide range of practical UAV observation conditions, including:
 - Parking lots
 - Overpasses
 - Bridges
-- Daytime scenes
-- Nighttime scenes
-- Extremely dark nighttime scenes
-- Foggy weather
-- Multiple UAV flight altitudes
+- Daytime
+- Nighttime
+- Dark-night conditions
+- Foggy conditions
+- Different UAV flight altitudes
 
 ---
 
 ## Data Preprocessing
 
-The visible and thermal cameras have different native spatial resolutions because of their distinct imaging mechanisms and sensor configurations.
+The visible and thermal infrared videos have different native resolutions
+because of their distinct imaging mechanisms and camera configurations.
 
-The preprocessing procedure is summarized as follows:
+The main preprocessing steps are summarized as follows:
 
-1. Visible and thermal videos were paired according to their collection sequences.
-2. Each video pair was manually center-aligned.
-3. The paired videos were resized to a unified resolution of 720 × 480.
-4. One frame pair was sampled every 100 frames to reduce scene redundancy.
-5. Image pairs with poor imaging quality were manually removed.
-6. A 50-pixel white border was added to each side of the images.
+1. Visible and thermal infrared videos were paired according to their
+   collection sequences.
+2. Each video pair was processed and manually center-aligned.
+3. The paired videos were resized to a unified spatial resolution of
+   720 × 480.
+4. One paired frame was extracted every 100 frames to reduce scene redundancy.
+5. Image pairs with poor imaging quality were removed through manual
+   inspection.
+6. A 50-pixel white border was added to each side of the paired images.
 7. The final images were stored at a resolution of 820 × 580.
 
-We did not perform additional pixel-level registration after center alignment. Therefore, the dataset retains realistic local misalignment caused by UAV attitude changes, camera distortion, viewpoint differences, and heterogeneous imaging mechanisms.
+Variations in UAV attitude, camera distortion, viewpoint, and heterogeneous
+imaging mechanisms inevitably introduce local pixel-level spatial
+discrepancies between the two modalities.
+
+Since these discrepancies represent a practical challenge in RGB-T UAV object
+detection, they are intentionally retained in DRTV30K. No further pixel-level
+calibration is performed after center alignment.
+
+---
+
+## Annotation
+
+Objects in DRTV30K are annotated using **Oriented Bounding Boxes (OBBs)**.
+
+In UAV imagery, vehicles may appear at arbitrary orientations because of
+different flight directions, camera angles, road layouts, and object poses.
+Conventional horizontal bounding boxes often include substantial background
+areas and cannot accurately describe the object orientation.
+
+Therefore, oriented bounding boxes are adopted to provide tighter and more
+accurate object localization.
+
+An oriented bounding box can generally be represented as:
+
+```text
+(x_center, y_center, width, height, angle)
+```
+
+where:
+
+- `x_center` and `y_center` denote the center coordinates of the object;
+- `width` and `height` denote the dimensions of the bounding box;
+- `angle` denotes the orientation of the object.
+
+Please refer to the annotation-format documentation provided in this
+repository for the exact coordinate representation and normalization rules
+used in the released labels.
 
 ---
 
 ## Scene Distribution
 
-DRTV30K covers six representative scene types.
+DRTV30K covers six representative UAV observation environments.
 
-| Scene | Number of Image Pairs |
+| Scene Type | Number of Image Pairs |
 |---|---:|
 | Urban roads | 13,906 |
 | Highways | 11,305 |
@@ -178,9 +294,12 @@ DRTV30K covers six representative scene types.
 | Bridges | 234 |
 | **Total** | **30,640** |
 
+The diversity of scenes introduces variations in background appearance,
+traffic density, object distribution, road structure, and spatial layout.
+
 ---
 
-## Illumination Conditions
+## Illumination and Weather Conditions
 
 The dataset contains four major illumination and weather conditions.
 
@@ -192,13 +311,18 @@ The dataset contains four major illumination and weather conditions.
 | Foggy | 541 |
 | **Total** | **30,640** |
 
-The large number of nighttime and dark-night samples makes DRTV30K suitable for evaluating multimodal detection under visible-modality degradation.
+Daytime and nighttime samples account for comparable portions of the dataset.
+Dark-night and foggy images provide more challenging conditions in which the
+visible modality may contain weak, incomplete, or degraded object information.
+
+These data are particularly useful for studying the complementary properties
+of visible and thermal infrared modalities.
 
 ---
 
 ## Flight Altitude Distribution
 
-The images were collected at flight altitudes ranging from 50 to 180 meters.
+DRTV30K was collected at UAV flight altitudes ranging from 50 to 180 meters.
 
 | Flight Altitude | Number of Image Pairs |
 |---|---:|
@@ -208,7 +332,8 @@ The images were collected at flight altitudes ranging from 50 to 180 meters.
 | 150–180 m | 3,511 |
 | **Total** | **30,640** |
 
-The altitude diversity introduces substantial variations in object scale and appearance.
+The wide altitude range introduces substantial variations in object scale,
+appearance details, target density, and background coverage.
 
 ---
 
@@ -219,20 +344,246 @@ The altitude diversity introduces substantial variations in object scale and app
 </p>
 
 <p align="center">
-  <em>Distribution of scene types, illumination conditions, and UAV flight altitudes in DRTV30K.</em>
+  <em>
+    Distribution of scene types, illumination conditions, and UAV flight
+    altitudes in DRTV30K.
+  </em>
 </p>
 
 > The statistical visualization will be added soon.
 
 ---
 
-## Annotation
+## Recommended Dataset Organization
 
-Objects are annotated using **Oriented Bounding Boxes (OBBs)**.
-
-Compared with conventional horizontal bounding boxes, oriented bounding boxes provide more accurate localization for vehicles with arbitrary orientations in UAV imagery.
-
-An oriented bounding box can be represented as:
+The exact directory names should follow the released archive. A recommended
+organization is shown below:
 
 ```text
-(x_center, y_center, width, height, angle)
+DRTV30K/
+├── train/
+│   ├── rgb/
+│   │   ├── images/
+│   │   └── labels/
+│   └── thermal/
+│       ├── images/
+│       └── labels/
+├── val/
+│   ├── rgb/
+│   │   ├── images/
+│   │   └── labels/
+│   └── thermal/
+│       ├── images/
+│       └── labels/
+├── test/
+│   ├── rgb/
+│   │   ├── images/
+│   │   └── labels/
+│   └── thermal/
+│       ├── images/
+│       └── labels/
+├── split_files/
+├── class_names.txt
+└── README.md
+```
+
+Each visible image should have a corresponding thermal infrared image with the
+same sample identifier.
+
+> Please revise this example if the directory structure of the final released
+> archive is different.
+
+---
+
+## Standard Benchmark Protocol
+
+The standard DRTV30K benchmark evaluates oriented object detection using the
+following seven categories:
+
+```text
+0: Car
+1: Freight Car
+2: Truck
+3: Van
+4: Tricycle
+5: Bus
+6: Construction Vehicle
+```
+
+The standard benchmark does not include:
+
+```text
+7: Pickup
+8: Emergency Vehicle
+```
+
+Pickup and Emergency Vehicle are released as rare categories for few-shot,
+long-tailed, and small-sample detection research.
+
+The recommended standard evaluation setting includes:
+
+- Oriented bounding box detection
+- Category-wise Average Precision
+- Mean Average Precision
+- Intersection over Union threshold of 0.5
+- Official training, validation, and test splits
+- Seven standard benchmark categories
+
+Researchers should clearly state whether their results are based on:
+
+- The standard seven-category benchmark;
+- A nine-category long-tailed setting;
+- A few-shot setting involving Pickup and Emergency Vehicle;
+- Another customized evaluation protocol.
+
+This distinction is important for ensuring fair comparison between different
+methods.
+
+---
+
+## Few-Shot Evaluation
+
+DRTV30K additionally provides two rare categories:
+
+| Category | Number of Instances |
+|---|---:|
+| Pickup | 395 |
+| Emergency Vehicle | 54 |
+
+These categories can be used to construct different few-shot or long-tailed
+evaluation protocols.
+
+Possible research settings include:
+
+- Base-to-novel category transfer
+- Few-shot fine-tuning
+- Rare-category detection
+- Long-tailed multimodal detection
+- Category-incremental detection
+- Cross-modal few-shot learning
+
+Since no single few-shot protocol is currently enforced, researchers should
+report their data split, number of shots, sampling strategy, and evaluation
+metrics when using these two categories.
+
+Official few-shot evaluation protocols may be added in future updates.
+
+---
+
+## Download
+
+DRTV30K can be downloaded from Baidu Netdisk:
+
+### Baidu Netdisk
+
+[Download DRTV30K](https://pan.baidu.com/s/1Jpj87JUGjJPDQNpt798jog?pwd=d884)
+
+```text
+Extraction code: d884
+```
+
+Please verify the integrity of the downloaded files before use.
+
+Additional download mirrors may be added in future updates.
+
+---
+
+## Usage Notes
+
+Before training or evaluating a model on DRTV30K, please note the following:
+
+1. Visible and thermal infrared images are paired by sample identifier.
+2. Local spatial discrepancies between modalities are intentionally retained.
+3. The standard benchmark contains seven categories.
+4. Pickup and Emergency Vehicle are excluded from standard benchmark
+   evaluation.
+5. Pickup and Emergency Vehicle remain available for few-shot and long-tailed
+   learning.
+6. The annotations use oriented bounding boxes.
+7. The official dataset split should be used for standard comparisons.
+8. Researchers should clearly state their category setting and evaluation
+   protocol when reporting results.
+
+---
+
+## Associated Paper
+
+The dataset is introduced in the following work:
+
+**Generative Alignment Network for Multimodal UAV Object Detection**
+
+Wentao Wu, Chenglong Li*, Ziwen Wang, Zhaodong Ding, Xiao Wang, and Bin Luo
+
+The formal publication information will be updated after the paper becomes
+publicly available.
+
+This repository currently focuses on the public release and documentation of
+the DRTV30K dataset. Experimental results from the associated paper are not
+included at this stage.
+
+---
+
+## Citation
+
+The formal citation will be updated after the associated paper is published.
+
+Before publication, please cite the dataset repository using the following
+entry:
+
+```bibtex
+@misc{wu2026drtv30k,
+  title        = {DRTV30K: A Large-Scale Multimodal UAV Object Detection Dataset},
+  author       = {Wentao Wu and Chenglong Li and Ziwen Wang and
+                  Zhaodong Ding and Xiao Wang and Bin Luo},
+  year         = {2026},
+  howpublished = {\url{https://github.com/Vehicle-AHU/DRTV30K}},
+  note         = {RGB-T UAV object detection dataset}
+}
+```
+
+After the associated paper is published, please use the official paper
+citation provided in this repository.
+
+---
+
+## License and Terms of Use
+
+DRTV30K is released for academic research and educational purposes.
+
+By downloading or using the dataset, users should:
+
+- Use the dataset only for lawful research and educational purposes;
+- Follow the license and usage terms provided in this repository;
+- Properly cite the dataset and associated publication;
+- Avoid redistributing the dataset without permission;
+- Avoid using the dataset in ways that violate privacy, legal, or ethical
+  requirements;
+- Clearly state any modifications made to the original dataset or annotations.
+
+The final license file will be provided in this repository.
+
+> Please replace this section with the final approved dataset license before
+> the official release.
+
+---
+
+## Contact
+
+For questions about the dataset, annotations, or evaluation protocol, please
+contact:
+
+**Wentao Wu**
+
+**Chenglong Li**  
+Corresponding author  
+Email: `lcl1314@foxmail.com`
+
+You may also submit an issue through this GitHub repository.
+
+---
+
+## Acknowledgements
+
+We thank all contributors involved in UAV data collection, multimodal video
+preprocessing, data screening, oriented bounding box annotation, and dataset
+quality inspection.
