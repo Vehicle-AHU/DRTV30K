@@ -59,7 +59,7 @@ DRTV30K can support research on:
 
 ## News
 
-- **2026-XX-XX:** DRTV30K is publicly released.
+- **2026-07-01:** DRTV30K is publicly released.
 - Dataset documentation and evaluation tools will be continuously updated.
 - The associated paper and source code will be released after they become
   publicly available.
